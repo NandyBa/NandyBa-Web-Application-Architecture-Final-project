@@ -5,20 +5,40 @@ movie_id = 550
 
 URL = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_Key}&language=en-US`;
 
+async function getMovieCredit(){
+	return await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${API_Key}&language=en-US`)
+	.then(response =>{ return response.json()})
+}
 
-
-// Make a request for a user with a given ID
 fetch(URL)
 .then(response => response.json())
 .then(movie => {
-	console.log(movie);
 	movieCoverUrl = 'https://www.themoviedb.org/t/p/w220_and_h330_face/'+ movie.backdrop_path ;
 	movieTitle = movie.original_title ;
 	movieReleaseDate = movie.release_date ;
 	document.getElementById('movieCover').src = movieCoverUrl ;
 	document.getElementById('movieTitle').innerHTML = movieTitle ;
 	document.getElementById('movieReleaseDate').innerHTML = 'Release date: ' + movieReleaseDate ;
+
+	getMovieCredit(movie_id).then( credits =>{
+		actors = [];
+		credits.cast.forEach(person =>{
+			if(person.known_for_department == "Acting"){
+				actors.push(person.name.toLowerCase());
+			}
+		})
+		document.getElementById('form-who-play').addEventListener("submit", function(e){
+			e.preventDefault();
+			response = document.getElementById('form-actor').value.toLowerCase();
+
+			if(actors.includes(response)){
+				alert('correct')
+			}else{
+				alert("It's incorrect")
+			}
+		});
+	})
+	
 })
-.then(function () {
-  // always executed
-});
+
+
