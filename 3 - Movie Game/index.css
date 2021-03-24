@@ -4,3 +4,15 @@
 #response{
 	color: red;
 }
+#actor-info{
+	clear: left;
+	display: flex;
+	align-items: center;
+}
+#actor-info img{
+	margin: 20px;
+	height: 10vh;
+}
+#actor-info .name{
+	text-transform: capitalize;
+}
