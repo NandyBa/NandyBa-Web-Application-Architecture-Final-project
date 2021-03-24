@@ -34,7 +34,7 @@ fetch(URL)
 			if(actors.includes(response)){
 				alert('correct')
 			}else{
-				alert("It's incorrect")
+				document.getElementById('response').innerHTML = "incorrect"
 			}
 		});
 	})
