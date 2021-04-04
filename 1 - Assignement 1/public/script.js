@@ -14,15 +14,23 @@ function registerUser(){
     c.clearRect(0, 0, canvas.width, canvas.height)
     let input = document.getElementById('username_field')
     let draw_btn = document.getElementById('draw')
+    let save_btn = document.getElementById('save')
     let user_message = document.getElementById('user_message')
     if(input.value.length >= 3){
         //Unlock draw button
-        if(draw_btn.disabled == true){ draw_btn.disabled = false}
+        if(draw_btn.disabled == true){
+            draw_btn.disabled = false
+            save_btn.disabled = false
+
+        }
         username = input.value
         user_message.innerHTML = `You are now logged in as : <b>${username}</b>`
     }
     else{
-        if(draw_btn.disabled == false){ draw_btn.disabled = true }
+        if(draw_btn.disabled == false){
+            draw_btn.disabled = true
+            save_btn.disabled = true
+        }
         username = input.value
         user_message.innerHTML = `You are no longer registered. Register to be able to see your drawings`
     }
@@ -179,6 +187,14 @@ function drawCircle(figSize = parseInt(document.getElementById('figure_size').va
         sendData(circle)        
     }
     
+}
+
+function save(){
+    $canvas = document.getElementById('canvas');
+    var imageurl = $canvas.toDataURL("image/png");
+
+    new_window = window.open('');
+    new_window.document.write("<img src='"+imageurl+"''>");
 }
 
 function getStartingPoint(figSize, borderSize){
