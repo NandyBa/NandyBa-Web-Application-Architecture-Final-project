@@ -76,11 +76,20 @@ app.post('/post/images', jsonParser, function (req, res) {
     })
 
     
-  })
-
-  
+  }) 
 
 });
+
+app.get('/see_images', function(res, res){
+
+  let db = client.db("admin");
+  collection = db.collection("images");
+
+  var cursor = collection.find( { tags: { $all: [ [ "username", "date",'image' ] ] } } );
+  cursor.each(function(data){
+    console.log(data)
+  });
+})
 
 //I listen for socket connection
 io.on('connect', (socket) => {
