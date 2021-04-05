@@ -197,7 +197,7 @@ function save(){
     username = document.getElementById('username_field').value
 
     let _data = {
-      username: "foo",
+      username: username,
       image: imageurl
     }
 
@@ -276,9 +276,4 @@ socket.on('share_line', (line) => {
     let last_drawer = document.getElementById('last_drawer')
     last_drawer.innerHTML = `The last drawer is <b>${line.user}</b>`
     drawLine(line.x, line.y, line.x2, line.y2, line.pencil_color, line.pencil_size)
-})
-
-socket.on('save_image', (image)=>{
-    new_window = window.open('');
-    new_window.document.write("<img src='"+image+"''>");
 })

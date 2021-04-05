@@ -1,0 +1,16 @@
+version : "3"
+services:
+  mongows:
+    image: "mongo:latest"
+    container_name: mongows
+    ports:
+      - "27017:27017"
+    restart: "on-failure"
+  
+  app:
+    build: .
+    depends_on:
+      - mongows
+    ports:
+      - "3000:3000"
+    restart: "on-failure"
